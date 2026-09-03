@@ -22,11 +22,7 @@ function MovieList({ onMovieClick }) {
     <ul>
       {Array.isArray(movies) &&
         movies.map((movie) => (
-          <li
-            className="movieItem"
-            key={movie.id}
-            onClick={() => onMovieClick(movie)}
-          >
+          <li className="movieItem" key={movie.id} onClick={() => onMovieClick(movie)}>
             {movie.title}
           </li>
         ))}
