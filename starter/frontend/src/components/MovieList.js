@@ -7,7 +7,7 @@ function MovieList({ onMovieClick }) {
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_MOVIE_API_URL}/movies`).then((response) => {
-      setMovies(response.data.movies);
+      setMovies(response.data); // Fixed: response.data is already the array!
     });
   }, []);
 
