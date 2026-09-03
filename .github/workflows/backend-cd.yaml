@@ -127,3 +127,7 @@ jobs:
           kustomize edit set image backend=$REGISTRY/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
           kustomize build | kubectl apply -f -
           kubectl rollout status deployment/backend
+      - name: Inspect Cluster Services
+        run: |
+          echo "=== CHECKING ALL SERVICES ==="
+          kubectl get services -o wide   
