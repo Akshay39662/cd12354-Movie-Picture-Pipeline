@@ -6,17 +6,27 @@ function MovieList({ onMovieClick }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_MOVIE_API_URL}/movies`).then((response) => {
-      const data = response.data;
-      setMovies(Array.isArray(data) ? data : data.movies || []);
-    });
+    axios
+      .get(`${process.env.REACT_APP_MOVIE_API_URL}/movies`)
+      .then((response) => {
+        const data = response.data;
+        setMovies(Array.isArray(data) ? data : data.movies || []);
+      })
+      .catch((error) => {
+        console.error('Error fetching movies:', error);
+        setMovies([]);
+      });
   }, []);
 
   return (
     <ul>
       {Array.isArray(movies) &&
         movies.map((movie) => (
-          <li className="movieItem" key={movie.id} onClick={() => onMovieClick(movie)}>
+          <li
+            className="movieItem"
+            key={movie.id}
+            onClick={() => onMovieClick(movie)}
+          >
             {movie.title}
           </li>
         ))}
