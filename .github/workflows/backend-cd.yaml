@@ -130,4 +130,12 @@ jobs:
       - name: Inspect Cluster Services
         run: |
           echo "=== CHECKING ALL SERVICES ==="
-          kubectl get services -o wide   
+          kubectl get services -o wide
+      - name: Check Backend Pod Logs
+        run: |
+          echo "=== CHECKING PODS AND LOGS ==="
+          kubectl get pods
+          # Automatically grab logs from the first running backend pod
+          POD_NAME=$(kubectl get pods -l app=backend -o jsonpath="{.items[0].metadata.name}")
+          echo "Logs for pod: $POD_NAME"
+          kubectl logs $POD_NAME    
